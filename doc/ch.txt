@@ -1,0 +1,385 @@
+�
+�
+◾
+◾
+Cahier des charges techniques – Plateforme Dev & Tech
+Mots d'ouverture :
+MAMADOU OURY BARRY 
+“Bâtir aujourd’hui la plateforme qui fera grandir notre communauté demain.”
+Ce document est bien plus qu’une simple liste de fonctionnalités :
+c’est la vision et la feuille de route qui guideront chaque ligne de code, chaque décision 
+technique et chaque choix de design.
+Il rassemble nos ambitions, nos exigences et notre engagement commun à créer un outil 
+fiable, performant et inclusif, au service de tous ses utilisateurs.
+À travers ces pages, nous posons les fondations d’un projet qui allie innovation 
+technologique et valeurs humaines.
+Chaque membre de l’équipe de développement y trouvera des repères clairs, des objectifs 
+précis et la certitude que son travail contribue à une mission plus grande : faire de Dev & 
+Tech une référence et une fierté collective.
+1. Présentation générale
+Nom du projet : Dev & Tech
+Type : Plateforme web communautaire responsive (desktop, tablette, mobile)
+Accès : Sur invitation des super Admins (nombre illimité de membres)
+Objectifs :
+●
+●
+●––
+Offrir un espace collaboratif complet pour les membres ;
+Faciliter la communication, la gestion de projets, le partage de ressources et la 
+planification d’événements :
+Mettre en avant les sponsors/partenaires via un footer dynamique. 
+     Public cible :
+Super Admins : contrôle total (utilisateurs, paramètres, sponsors/partenaires)
+Admins : gestion des membres, contenus et projets
+Membres : accès aux modules communautaires et projets
+2. 
+Architecture technique
+1. Front-End
+1.1 Technologies et Frameworks––––––
+Framework principal : React.js (ou Vue.js si l’équipe est plus à l’aise)
+Gestion du routage : React Router (ou Vue Router)
+Gestion d’état : Redux Toolkit ou Zustand (ou Pinia pour Vue)
+Préprocesseur CSS : SCSS ou TailwindCSS pour rapidité et cohérence
+Build & Bundling : Vite ou Webpack
+Compatibilité navigateurs : Chrome, Firefox, Safari, Edge (versions récentes)
+1.2 Structure et organisation
+●
+●
+●
+●
+●
+●
+     Architecture :
+/components : composants réutilisables (boutons, cartes, formulaires)
+ /pages : pages principales (Accueil, Dashboard, etc.)
+/layouts : gabarits communs (header, footer, sidebar)
+/store : gestion d’état global
+/assets : images, icônes, polices
+/services : appels API
+•     Responsive design : grille 12 colonnes desktop, 4 colonnes mobile
+•     Accessibilité : respect WCAG 2.1 AA
+1.3 Composants clés
+•     Header : logo, menu, profil utilisateur
+1.
+2.
+•     Footer :
+Bloc 1 : liens internes utiles
+Bloc 2 : logos sponsors/partenaires (dynamiques)
+•     Cartes projet : titre, statut, responsable, CTA
+•     Formulaires : validation côté client + messages d’erreur clairs
+•     Tableaux : tri, filtres, pagination
+1.4 Intégration API
+•     Communication avec le backend via HTTPS + JSON
+•     Gestion des erreurs réseau et affichage des messages utilisateur
+•     Authentification via token JWT stocké en mémoire sécurisée (pas de localStorage pour éviter 
+XSS)
+Synthèse Front-End
+          Le 
+front doit être modulaire, réactif et accessible, avec un design system appliqué partout. 
+Les composants doivent être réutilisables et découplés, et la communication avec l’API doit être 
+sécurisée et robuste. L’objectif est de livrer une interface fluide, claire et cohérente sur tous les 
+écrans.--
+2. Back-End
+2.1 Technologies et Frameworks––––
+Langage : Node.js (NestJS ou Express) ou Python (Django REST Framework)
+Base de données : PostgreSQL (relationnelle) ou MongoDB (NoSQL)
+ORM : Prisma (Node.js) ou Sequelize / Mongoose
+API : REST ou GraphQL selon besoins
+Temps réel : WebSockets (Socket.io) pour messagerie et notifications
+2.2 Architecture
+●
+●
+●
+●
+●
+Structure : /controllers : logique métier
+/models : schémas de données
+/routes : endpoints API
+/services : logique applicative
+/middlewares : authentification, validation, logs
+• Sécurité : HTTPS obligatoire
+• Authentification JWT ou OAuth 2.0
+• Validation stricte des entrées (Joi, Yup)
+• Chiffrement mots de passe (bcrypt/argon2)
+• Rate limiting et logs d’audit
+2.3 Modules principaux
+• Gestion utilisateurs : création, rôles, permissions
+• Gestion projets : CRUD complet, Kanban, tâches
+• Messagerie : globale et par projet
+• Calendrier : événements globaux et par projet
+• Sponsors & Partenaires : CRUD complet, mise à jour footer
+• Fichiers : upload vers Amazon S3 avec liens sécurisés
+2.4 Performances
+• Mise en cache (Redis) pour données fréquentes
+• Indexation BDD pour requêtes rapides
+• Pagination côté serveur
+• Pagination côté serveur
+• Monitoring (Prometheus, Grafana)
+Synthèse Back-End
+          Le backend doit être sécurisé, modulaire et scalable, avec une API claire et documentée. 
+Les règles métier (notamment pour la gestion des rôles et du footer dynamique) doivent être 
+centralisées et testées. L’architecture doit permettre l’ajout futur de modules sans refonte 
+majeure.
+3. 
+Charte graphique & Design System
+ Palette de couleurs
+• Couleurs : Bleu profond  (principal)
+• Bleu clair  (accent)
+• Gris clair  (fond)
+• Blanc #FFFFFF (surface)
+• Vert menthe #10B981 (succès)
+• Rouge corail #EF4444 (erreur)
+ Règle d’usage :
+• Bleu profond pour les éléments structurants (titres, boutons primaires, header)
+• Bleu clair pour les accents et éléments interactifs
+• Gris clair pour les arrière-plans neutres
+• Vert menthe et rouge corail pour les retours d’état (succès/erreur)
+Typographies
+• Titres : Poppins• H1 : 36px, gras
+• H2 : 24px, semi-gras
+• H3 : 20px, semi-gras
+• Texte courant : Inter• Corps : 16px, régulier
+• Légendes : 14px, régulier
+ Règle d’usage :
+• Poppins pour donner un aspect moderne et affirmé aux titres
+• Inter pour la lisibilité optimale des textes longs
+• Grille : Desktop : 12 colonnes
+• Mobile : 4 colonnes
+Composants UI
+• Boutons Primaires : fond bleu profond, texte blanc, coins arrondis 6px
+• Boutons Secondaires : fond blanc, bordure et texte bleu profond
+• États : normal, hover (teinte plus foncée), désactivé (gris clair)
+• Cartes : Fond blanc, coins arrondis 8px, ombre légère
+• Formulaires : Label clair au-dessus
+• Bordure gris clair, focus en bleu clair
+• Messages d’erreur en rouge corail
+• Icônes : Style outline, couleur adaptée au contexte
+Grille & Espacements
+• Grille : Desktop : 12 colonnes
+• Mobile : 4 colonnes
+• Espacements standards : 8px, 16px, 32px
+• Marges et paddings cohérents sur toutes les pages
+ Modes clair & sombre
+• Contrastes optimisés pour lisibilité
+• Couleurs adaptées pour chaque mode
+• Logos sponsors/partenaires visibles dans les deux modes
+ Footer
+• Bloc 1 : Liens internes utiles (Accueil, Communauté, Projets, Ressources, Calendrier, 
+Messagerie)
+• Bloc 2 : Logos sponsors/partenaires (ajoutés par Super Admins, cliquables, masqués si aucun)
+Style visuel
+• Illustrations vectorielles
+• Photos authentiques
+• Animations douces (hover, transitions)
+• Cohérence visuelle sur tous les écrans
+4. Wireframes – Dev & Tech
+1. Écrans publics
+1.1 Accueil / Présentation
+• Rôle : Page d’entrée pour visiteurs non connectés.
+• Contenu : Logo + slogan
+• Présentation courte de la plateforme
+• Boutons “S’inscrire” et “Se connecter”
+• Aperçu des fonctionnalités clés
+• Footer global
+Interactions : clic sur CTA → page correspondante.
+1.2 Connexion / Inscription
+• Rôle : Authentification des utilisateurs.
+• Contenu : Formulaire email/mot de passe
+• Bouton “Connexion”
+• Onglet ou bouton “Créer un compte”
+Interactions : validation formulaire, gestion erreurs. 
+2. Espace membre
+2.1 Tableau de bord personnalisé
+• Rôle : Vue d’ensemble des activités.
+• Contenu : Résumé projets, messages, événements à venir
+• Notifications récentes
+Interactions : clic vers détails.
+2.2 Profil utilisateur
+• Rôle : Affichage et modification des infos personnelles.
+• Contenu :• Photo, nom, bio, compétences
+• Bouton “Modifier profil”
+Interactions : upload photo, sauvegarde infos.
+2.3 Fil général
+• Rôle : Flux d’actualités communautaires.
+• Contenu : Posts, commentaires, réactions
+Interactions : publier, liker, commenter.
+2.4 Forum thématique
+• Rôle : Discussions par sujet.
+• Contenu : Liste sujets, nombre réponses, date dernière activité
+Interactions : créer sujet, répondre.
+2.5 Groupe privé
+• Rôle : Espace restreint à certains membres.
+• Contenu : Discussions, documents partagés
+Interactions : poster, télécharger fichiers.
+2.6 Annuaire des membres + fiche membre
+• Rôle : Trouver et consulter profils.
+• Contenu :•Liste avec filtres
+• Fiche détaillée
+Interactions : recherche, clic vers profil.
+3. Projets
+3.1 Liste des projets
+• Rôle : Vue globale des projets.
+• Contenu : Cartes projet avec titre, statut, responsable
+Interactions : filtrer, trier, clic vers détail.
+3.2 Détail projet
+• Rôle : Informations complètes.
+• Contenu : Objectifs, tâches, documents, membres
+Interactions : modifier, commenter, uploader.
+3.3 Liste des tâches
+• Rôle : Suivi visuel des tâches.
+• Contenu : Colonnes par statut
+Interactions : drag & drop, ajout tâche.
+3.4 Formulaire projet
+• Rôle : Création/modification projet.
+• Contenu : Champs titre, description, dates, membres
+Interactions : validation, annulation.
+4. Ressources & Documents
+4.1 Bibliothèque de ressources
+• Rôle : Accès aux documents partagés.
+• Contenu : Liste avec catégories, recherche
+Interactions : téléchargement, prévisualisation.
+4.2 Détail / ajout de document
+• Rôle : Voir ou uploader un fichier.
+• Contenu : Métadonnées, bouton télécharger
+Interactions : upload, suppression.
+5. Communication
+5.1 Messagerie globale
+• Rôle : Chat temps réel.
+• Contenu : Liste messages, champ saisie
+Interactions : envoyer, réagir.
+5.2 Messagerie privée / par projet
+• Rôle : Échanges ciblés.
+• Contenu : Fil de discussion
+Interactions : envoyer, joindre fichier.
+6. Calendrier
+6.1 Calendrier global / par projet
+• Rôle : Planification événements.
+• Contenu : Vue mensuelle/hebdo
+Interactions : ajouter, modifier, supprimer événement.
+7. Administration
+7.1 Tableau de bord admin
+• Rôle : Vue globale gestion plateforme.
+• Contenu : Statistiques, alertes
+Interactions : clic vers modules.
+7.2 Gestion des utilisateurs & rôles
+• Rôle : Ajouter, modifier, supprimer membres.
+• Contenu : Liste, filtres, actions
+Interactions : changement rôle, suspension.
+7.3 Paramètres plateforme
+• Rôle : Configurations globales.
+• Contenu : Logo, couleurs, modules activés
+Interactions : sauvegarde paramètres.
+8. Super Admin
+8.1 Gestion des Sponsors & Partenaires
+• Rôle : Contrôle complet sur affichage sponsors.
+• Contenu : Formulaire ajout/modif/suppression
+• Champs : logo, nom, description courte/détaillée, portée, lien, dates, ordre
+Interactions : mise à jour footer automatique.
+5. Règles UX
+• Navigation intuitive et cohérente
+• Responsive optimisé
+• États vides, chargement, erreur, succès prévus
+• Composants réutilisables
+6. Performances
+• Temps de chargement < 3s
+• Optimisation images/assets
+• Mise en cache des données fréquentes
+• Lazy loading pour modules lourds
+7. Maintenance & évolutivité
+• Code modulaire et documenté
+• Versionning via Git
+• Environnements : dev, staging, prod
+• Ajout de modules sans refonte majeure
+8. Livrables attendus côté développement 
+1. Code & Architecture
+     Code source complet
+• Front-End (React.js/Vue.js) : pages, composants, styles, gestion d’état, intégration API
+• Back-End (Node.js/NestJS ou Django) : API REST/GraphQL, logique métier, sécurité, gestion 
+des rôles
+• Scripts de build et configuration (Webpack/Vite, ESLint, Prettier)
+     Structure de projet claire
+• Arborescence organisée (components, services, assets, tests…)
+• Nommage cohérent et conventions respectées
+     Architecture documentée
+• Schéma des modules
+• Diagramme des flux de données (Front ↔ API ↔ BDD ↔ Stockage)
+2. Base de données & Stockage
+     Schéma de base de données
+• Tables/collections pour utilisateurs, rôles, projets, tâches, messages, sponsors, ressources, 
+événements
+• Contraintes, index, relations
+• Scripts de migration• Création, mise à jour, rollback
+     Stockage fichiers
+• Configuration Amazon S3 ou équivalent
+• Gestion des permissions et URLs sécurisées
+3. API & Intégrations
+     Endpoints API documentés
+• Authentification, gestion utilisateurs, projets, messagerie, calendrier, ressources, sponsors
+• Méthodes, paramètres, réponses, codes d’erreur
+     Sécurité API
+• Authentification JWT/OAuth 2.0
+• Validation des entrées et gestion des erreurs
+• Tests API• Unitaires et d’intégration
+     Intégrations externes
+• Notifications push (Firebase/OneSignal)
+• CDN pour assets
+4. Interface utilisateur
+     Implémentation du Design Systeme
+Couleurs, typographies, composants réutilisables
+     Pages et écrans complets
+• Pages publiques (Accueil, Connexion, Inscription…)
+• Espace membre, projets, messagerie, calendrier, administration
+     Responsive design
+Desktop, tablette, mobile
+     Accessibilité
+Respect WCAG 2.1 AA
+• Interactions et animations
+États hover, transitions, feedback utilisateur
+5. Tests & Qualité
+     Tests unitaires
+• Front et back sur les modules critiques
+• Tests E2E : Scénarios utilisateurs clés (connexion, création projet, messagerie…)
+• Rapports de couverture : % de code testé
+• Correction des bugs : Liste des anomalies corrigées avant livraison
+6. Documentation
+• Documentation technique : Installation, configuration, déploiement
+• Structure du code et conventions
+• Documentation API : Swagger/OpenAPI ou équivalent
+• Guide utilisateur : Pour membres, admins et super admins
+• Procédures de maintenance : Sauvegardes, mises à jour, monitoring
+7. Déploiement
+• Environnements configurés : Dev, staging, production
+• Scripts de déploiement : Automatisation CI/CD
+• Monitoring & logs : Suivi des erreurs, performances, sécurité 
+Bref,
+Les livrables côté développement doivent couvrir tout le cycle de vie :
+• Code (front, back, mobile si prévu)
+• Données (schéma BDD, migrations)
+• API (fonctionnelles, sécurisées, documentées)
+• UI (fidèle au design, responsive, accessible)
+• Qualité (tests, corrections)
+• Documentation (technique et fonctionnelle)
+• Mise en ligne (environnements, scripts, monitoring)
+Mots de la fin :
+ BOUBACAR YARIE BANGOURA 
+Nous arrivons au terme de ce document, mais c’est en réalité le point de départ d’une 
+aventure collective.
+Ce projet Dev & Tech est l’occasion de mettre en mouvement nos compétences, notre 
+créativité et notre sens du détail pour donner vie à un outil qui comptera pour toute une 
+communauté.
+Chaque fonctionnalité que vous développerez, chaque optimisation que vous 
+apporterez, chaque problème que vous résoudrez sera une pierre ajoutée à un édifice que 
+nous construisons ensemble.
+Ce n’est pas seulement un produit que nous livrons : c’est une expérience, un environnement 
+où la technologie devient un levier de collaboration, de partage et d’impact concret.
+Nous avons défini une vision claire, des objectifs précis et une feuille de route solide. À 
+présent, c’est votre savoir-faire, votre engagement et votre esprit d’équipe qui 
+transformeront ces lignes en une plateforme vivante, performante et inspirante.
+Chaque étape franchie sera une victoire commune, chaque défi relevé une preuve de notre 
+capacité à aller plus loin.
+Alors avançons avec confiance, exigence et enthousiasme.
+Ce que nous allons réaliser ensemble ne se limitera pas à répondre à un besoin : cela portera 
+notre signature, notre exigence de qualité et notre volonté de créer quelque chose qui fera 
+date.
+Ensemble, faisons de Dev & Tech un projet qui dépasse les attentes et inspire l’avenir.
+Conakry, 03 septembre 2025
