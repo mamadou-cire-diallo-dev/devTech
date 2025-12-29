@@ -18,11 +18,6 @@ function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
           <div className="space-y-6">
-            <div className="inline-flex items-center gap-2 bg-white rounded-lg px-3 py-1.5 shadow-sm">
-              <div className="w-6 h-6 bg-primary rounded flex items-center justify-center">
-                <span className="text-white text-xs font-bold">E</span>
-              </div>
-            </div>
             
             <h1 className="text-4xl lg:text-5xl font-extrabold text-primary leading-tight">
               Connectez-vous,<br />
